@@ -1,0 +1,67 @@
+/******************************************
+ Write a program that can encrypt and 
+ decrpyt using the general Caesar cipher,
+ also known as an additive cipher.
+*******************************************/
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+const int KEY = 2;
+const int STRINGLEN = 10+1;
+const char alphabet[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
+int toVal(char c){
+    for(int x = 0; x < 26; x++){
+        if(toupper(c) == alphabet[x])
+            return x;
+    }
+    return 99;
+}
+
+char toChar(int i){
+    if(i >= 0 && i <= 25)
+        return alphabet[i];
+    else
+        return ' ';
+}
+
+void encrypt(char input[], int len){
+    cout << "\nencrypting...\n";
+    for(int i = 0; i < len; i++){
+        if(toVal(input[i]) <= 25){
+            cout << toChar(  (toVal(input[i]) + KEY) % 26 );
+        }
+        else
+            cout << ' ';
+    }
+    cout << "\n";
+}
+
+void decrypt(char input[], int len){
+    // cout << "\ndecrypting...\n";
+    // for(int i = 0; i < len; i++){
+    //     if(toVal(input[i]) <= 25){
+    //         cout << toChar(  26 - (toVal(input[i]) - KEY) % 26 );
+    //     }
+    //     else
+    //         cout << ' ';
+    // }
+    // cout << "\n";
+}
+
+int main()
+{
+    char input[STRINGLEN];
+    
+    cout << "What is your text? ";
+    cin.getline(input, STRINGLEN);
+    
+    cout << "\nInput: "<<input<<"\n";
+    encrypt(input, sizeof(input));
+    decrypt(input, sizeof(input));
+
+    return 0;
+}
